@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Context\n\n# upload necessary libraries\nlibrary(readxl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(writexl)\nlibrary(stringr)\nlibrary(ggthemes)\n\n\n# read the excel file as a csv\ntop5 &lt;- read_excel(\"Top5Leagues_Payroll.xlsx\")\n\n\n# select the necessary columns and create a dataframe where there is the total money spent of each league across seasons\na &lt;- top5 |&gt;\n  select(-c(\"# Pl\", \"Weekly Wages\", \"% Estimated\", \"Squad (again)\")) |&gt;\n  mutate(annual = str_extract(`Annual Wages`, \"\\\\$[0-9,]+\")) |&gt;\n  mutate(annual = as.numeric(gsub(\"[$,]\", \"\", annual))) |&gt;\n  select(-`Annual Wages`) |&gt;\n  filter(Season &gt;= 2013) |&gt;\n  summarise(.by = c(League, Season), total = sum(annual))\n\n\n# plot the graph\na |&gt;\n  ggplot(aes(x = Season, y = total, color = League)) +\n  geom_point() +\n  geom_line() +\n  scale_y_continuous(labels = scales::dollar_format()) +\n  scale_x_continuous(breaks = seq(2013, 2022, by = 1)) +\n  labs(title = \"Total Annual Wages for Each League\",\n       subtitle = \"Each league has steadily increased spending\",\n       color = NULL) +\n  theme_fivethirtyeight()"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi, my name is Daniel Cho…"
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "About",
+    "section": "",
+    "text": "Hi, my name is Daniel Cho…"
+  },
+  {
+    "objectID": "about.html#about-this-project",
+    "href": "about.html#about-this-project",
+    "title": "About",
+    "section": "About This Project",
+    "text": "About This Project\nWith the help of David Kane’s Free Data Science Bootcamp, I learned the basics of data science in six weeks to create this project."
+  },
+  {
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "model",
+    "section": "",
+    "text": "# install necessary libraries\nlibrary(readxl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(writexl)\nlibrary(stringr)\nlibrary(rstanarm)\n\nLoading required package: Rcpp\nThis is rstanarm version 2.21.4\n- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!\n- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.\n- For execution on a local, multicore CPU with excess RAM we recommend calling\n  options(mc.cores = parallel::detectCores())\n\nlibrary(ggthemes)\n\n\n# read the excel file as a csv\ntop5 &lt;- read_excel(\"Top5Leagues_Payroll.xlsx\")\n\n\n# select the necessary columns and create a data frame where there is the total money spent of each league across seasons\nx &lt;- top5 |&gt;\n  select(\"Season\", \"Rk\", \"Squad\", \"Annual Wages\", \"Standing\") |&gt;\n  mutate(annual = str_extract(`Annual Wages`, \"\\\\$[0-9,]+\")) |&gt;\n  mutate(annual = as.numeric(gsub(\"[$,]\", \"\", annual))) |&gt;\n  select(-`Annual Wages`)\n\n\n# create a new data frame, where there is a column for a teams % salary out of the entire league\nx_1 &lt;- x |&gt;\n  summarise(.by = Season, Rk = Rk, Squad = Squad, Standing = Standing, annual = annual, percent = annual/sum(annual))\n\nWarning: Returning more (or less) than 1 row per `summarise()` group was deprecated in\ndplyr 1.1.0.\nℹ Please use `reframe()` instead.\nℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`\n  always returns an ungrouped data frame and adjust accordingly.\n\n\n\n# create models, where standing depends on Rk, and in the other Rk and percent\nfit_1 &lt;- stan_glm(Standing ~ Rk,\n                  data = x,\n                  family = gaussian,\n                  refresh = 0,\n                  seed = 9)\n\nfit_2 &lt;- stan_glm(Standing ~ Rk + percent,\n                  data = x_1,\n                  family = gaussian,\n                  refresh = 0)\n\n\n# glance details of the model \nfit_1\n\nstan_glm\n family:       gaussian [identity]\n formula:      Standing ~ Rk\n observations: 1052\n predictors:   2\n------\n            Median MAD_SD\n(Intercept) 3.2    0.3   \nRk          0.7    0.0   \n\nAuxiliary parameter(s):\n      Median MAD_SD\nsigma 4.1    0.1   \n\n------\n* For help interpreting the printed output see ?print.stanreg\n* For info on the priors used see ?prior_summary.stanreg\n\nfit_2\n\nstan_glm\n family:       gaussian [identity]\n formula:      Standing ~ Rk + percent\n observations: 1052\n predictors:   3\n------\n            Median MAD_SD\n(Intercept)   3.9    0.4 \nRk            0.7    0.0 \npercent     -23.0    7.9 \n\nAuxiliary parameter(s):\n      Median MAD_SD\nsigma 4.1    0.1   \n\n------\n* For help interpreting the printed output see ?print.stanreg\n* For info on the priors used see ?prior_summary.stanreg\n\n\n\n# compare the models (fit_2 is better)\nloo_compare(loo(fit_1), loo(fit_2))\n\nWarning: Not all models have the same y variable. ('yhash' attributes do not\nmatch)\n\n\n      elpd_diff se_diff\nfit_2  0.0       0.0   \nfit_1 -3.6      29.3   \n\n\n\n# create object to model (teams of rank 1 - 20)\nnewobs &lt;- tibble(Rk = 1:20)\n\n# create posterior distribution of end-of-year standings depeding on Rk\npe &lt;- posterior_epred(fit_1, newdata = newobs) |&gt; \n  as_tibble() |&gt;\n  pivot_longer(cols = `1`:`20`,\n               names_to = \"rank\",\n               values_to = \"standing\") |&gt;\n  mutate_all(as.numeric)\n\n\n# plot the posterior distribution\npe |&gt;\n  ggplot(aes(x = rank, y = standing)) +\n  geom_point(alpha = 0.5) + \n  scale_y_reverse(breaks = seq(20, 1, by = -1)) +\n  scale_x_reverse(breaks = seq(20, 1, by = -1)) +\n  labs(title = \"Posterior Distribution of Team Standing \\nDepending on Payroll Rank\",\n       subtitle = \"There is a positive correlation between league position and payroll\",\n       y = \"Standing\",\n       x = \"Payroll Rank\") +\n  theme_fivethirtyeight()"
+  }
+]

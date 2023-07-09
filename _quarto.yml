@@ -12,7 +12,7 @@ website:
       - href: model.qmd
         text: Model
       - href: sources.qmd
-        text: About
+        text: Sources
       - about.qmd
 
 format:

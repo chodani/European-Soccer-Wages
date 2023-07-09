@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: e72b224e-d0f8-441b-934f-0efaa48ecb2b
+      url: 'https://chodani.quarto.pub/european-soccer-wages'

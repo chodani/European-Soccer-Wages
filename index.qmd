@@ -1,5 +1,49 @@
 ---
 title: "Overview"
+execute: 
+  echoe: FALSE
+  message: FALSE
 ---
 
 ### Context
+
+
+```{r}
+# upload necessary libraries
+library(readxl)
+library(tidyverse)
+library(writexl)
+library(stringr)
+library(ggthemes)
+```
+
+```{r}
+# read the excel file as a csv
+top5 <- read_excel("Top5Leagues_Payroll.xlsx")
+```
+
+```{r}
+# select the necessary columns and create a data frame where there is the total money spent of each league across seasons
+a <- top5 |>
+  select(-c("# Pl", "Weekly Wages", "% Estimated", "Squad (again)")) |>
+  mutate(annual = str_extract(`Annual Wages`, "\\$[0-9,]+")) |>
+  mutate(annual = as.numeric(gsub("[$,]", "", annual))) |>
+  select(-`Annual Wages`) |>
+  filter(Season >= 2013) |>
+  summarise(.by = c(League, Season), total = sum(annual))
+```
+
+```{r}
+# plot the graph
+a |>
+  ggplot(aes(x = Season, y = total, color = League)) +
+  geom_point() +
+  geom_line() +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  scale_x_continuous(breaks = seq(2013, 2022, by = 1)) +
+  labs(title = "Total Annual Wages for Each League",
+       subtitle = "Each league has steadily increased spending",
+       color = NULL) +
+  theme_fivethirtyeight()
+```
+

@@ -1,3 +1,86 @@
 ---
 title: "model"
 ---
+
+```{r}
+# install necessary libraries
+library(readxl)
+library(tidyverse)
+library(writexl)
+library(stringr)
+library(rstanarm)
+library(ggthemes)
+```
+
+```{r}
+# read the excel file as a csv
+top5 <- read_excel("Top5Leagues_Payroll.xlsx")
+```
+
+```{r}
+# select the necessary columns and create a data frame where there is the total money spent of each league across seasons
+x <- top5 |>
+  select("Season", "Rk", "Squad", "Annual Wages", "Standing") |>
+  mutate(annual = str_extract(`Annual Wages`, "\\$[0-9,]+")) |>
+  mutate(annual = as.numeric(gsub("[$,]", "", annual))) |>
+  select(-`Annual Wages`)
+```
+
+```{r}
+# create a new data frame, where there is a column for a teams % salary out of the entire league
+x_1 <- x |>
+  summarise(.by = Season, Rk = Rk, Squad = Squad, Standing = Standing, annual = annual, percent = annual/sum(annual))
+```
+
+```{r}
+# create models, where standing depends on Rk, and in the other Rk and percent
+fit_1 <- stan_glm(Standing ~ Rk,
+                  data = x,
+                  family = gaussian,
+                  refresh = 0,
+                  seed = 9)
+
+fit_2 <- stan_glm(Standing ~ Rk + percent,
+                  data = x_1,
+                  family = gaussian,
+                  refresh = 0)
+```
+
+```{r}
+# glance details of the model 
+fit_1
+fit_2
+```
+
+```{r}
+# compare the models (fit_2 is better)
+loo_compare(loo(fit_1), loo(fit_2))
+```
+
+```{r}
+# create object to model (teams of rank 1 - 20)
+newobs <- tibble(Rk = 1:20)
+
+# create posterior distribution of end-of-year standings depeding on Rk
+pe <- posterior_epred(fit_1, newdata = newobs) |> 
+  as_tibble() |>
+  pivot_longer(cols = `1`:`20`,
+               names_to = "rank",
+               values_to = "standing") |>
+  mutate_all(as.numeric)
+```
+
+```{r}
+# plot the posterior distribution
+pe |>
+  ggplot(aes(x = rank, y = standing)) +
+  geom_point(alpha = 0.5) + 
+  scale_y_reverse(breaks = seq(20, 1, by = -1)) +
+  scale_x_reverse(breaks = seq(20, 1, by = -1)) +
+  labs(title = "Posterior Distribution of Team Standing \nDepending on Payroll Rank",
+       subtitle = "There is a positive correlation between league position and payroll",
+       y = "Standing",
+       x = "Payroll Rank") +
+  theme_fivethirtyeight()
+```
+
