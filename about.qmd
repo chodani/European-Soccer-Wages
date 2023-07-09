@@ -1,0 +1,13 @@
+---
+title: "About"
+---
+
+## About Me
+
+Hi, my name is Daniel Cho...
+
+
+
+## About This Project
+
+With the help of [David Kane's Free Data Science Bootcamp] (https://bootcamp.davidkane.info/), I learned the basics of data science in six weeks to create this project.
