@@ -81,6 +81,8 @@ pe |>
        subtitle = "There is a positive correlation between league position and payroll",
        y = "Standing",
        x = "Payroll Rank") +
-  theme_fivethirtyeight()
+  theme_fivethirtyeight() +
+  theme(axis.title.x = element_text()) +
+  theme(axis.title.y = element_text())
 ```
 
