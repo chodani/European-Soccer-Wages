@@ -4,7 +4,11 @@ title: "About"
 
 ## About Me
 
-Hi, my name is Daniel Cho...
+Hi, my name is **Daniel Cho**. I'm interested in sports (mainly soccer), animation, and classics. I hope to pursue more data science projects, learn web development, and more!
+
+**Education**: Belmont Hill '23, Yale University '27
+
+You can contact me about this project via [email](daniel.sg.cho@gmail.com), and look at my code on [Github](https://github.com/chodani). 
 
 
 

@@ -1,8 +1,12 @@
 ---
-title: "sources"
+title: "Sources"
 ---
-### 
 
-hbref
+### Data
+All data was compiled using the [fbref](https://fbref.com/en/) soccer database. Fbref description...  
 
-process
+ 
+### Process
+screen shot website
+
+screen shot excel 

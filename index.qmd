@@ -6,7 +6,7 @@ execute:
 ---
 
 ### Context
-
+With the global commercialization of soccer, clubs have been rapidly spending more on their squads. Takeovers from American investors and controversy concerning foreign investment has sparked topics about teams' sources of wealth. Across many sports, there have been discussions about the implementation of salary caps.
 
 ```{r}
 #| echo: false
@@ -21,6 +21,9 @@ library(ggthemes)
 ```
 
 ```{r}
+#| echo: false
+#| message: false
+#| output: false
 # read the excel file as a csv
 top5 <- read_excel("Top5Leagues_Payroll.xlsx")
 ```
@@ -40,6 +43,8 @@ a <- top5 |>
 ```
 
 ```{r}
+#| echo: false
+#| message: false
 # plot the graph
 a |>
   ggplot(aes(x = Season, y = total, color = League)) +
@@ -52,6 +57,6 @@ a |>
        color = NULL) +
   theme_fivethirtyeight()
 ```
-
-Soccer clubs have been rapidly spending more on their squads. The data was collected from https://fbref.com/en/; since payrolls and standings were stored in different locations and separated by years, the data was compiled into a single excel file. Data includes the top five European leagues from mostly the 2013 to 2022 seasons. I estimated a Bayesian linear model with standing as the dependent variable and payroll rank as the independent variable.
+### Summary
+The data was collected from [fbref](https://fbref.com/en/); since payrolls and standings were stored in different locations and separated by years, the data was compiled into a single excel file. Data includes the top five European leagues from mainly the 2013 to 2022 seasons. I estimated a Bayesian linear model with standing as the dependent variable and payroll rank as the independent variable.
 
