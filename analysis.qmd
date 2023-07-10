@@ -68,6 +68,32 @@ d <- top5 |>
   summarise(.by = Season, Rk = Rk, Squad = Squad, Standing = Standing, annual = annual, percent = annual/sum(annual))
 ```
 ```{r}
+d_1 <- d |>
+  ggplot(aes(x = Rk, y = Standing)) +
+  geom_jitter(alpha = 0.5, aes(text = paste("Season:", Season, "\n", 
+                                                "Payroll:", currency(annual), "\n",
+                                                "Standing:", Standing, "\n",
+                                                "Rank:", Rk, "\n",
+                                                "Team:", Squad))) +
+  scale_x_reverse(breaks = seq(20, 1, by = -1)) +
+  scale_y_reverse(breaks = seq(20, 1, by = -1)) +
+  geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
+  labs(title = "Payroll Rank vs. Season Standing \n in the Top Five European Leaguse",
+       subtitle = "There is a positive correlation between the two",
+       x = "Payroll Rank",
+       y = "Season Standing") +
+  theme_fivethirtyeight() +
+  theme(axis.title.x = element_text()) +
+  theme(axis.title.y = element_text())
+```
+
+```{r}
+d_1 |>
+  ggplotly(tooltip = "text") |>
+  layout(title = list(font = list(family = "Arial")))
+```
+
+```{r}
 # create data frame to measure a team's performance relative to payroll rank, diff is difference between payroll rank and standing (+ is good)
 differential <- top5 |>
   select(-c("# Pl", "Weekly Wages", "% Estimated", "Squad (again)")) |>

@@ -53,3 +53,5 @@ a |>
   theme_fivethirtyeight()
 ```
 
+Soccer clubs have been rapidly spending more on their squads. The data was collected from https://fbref.com/en/; since payrolls and standings were stored in different locations and separated by years, the data was compiled into a single excel file. Data includes the top five European leagues from mostly the 2013 to 2022 seasons. I estimated a Bayesian linear model with standing as the dependent variable and payroll rank as the independent variable.
+
