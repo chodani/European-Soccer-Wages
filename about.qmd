@@ -8,7 +8,7 @@ Hi, my name is **Daniel Cho**. I'm interested in sports (mainly soccer), animati
 
 **Education**: Belmont Hill '23, Yale University '27
 
-You can contact me about this project via [email](daniel.sg.cho@gmail.com), and look at my code on [Github](https://github.com/chodani). 
+My code is available on [Github](https://github.com/chodani), and my contact is daniel.sg.cho@gmail.com. 
 
 
 
