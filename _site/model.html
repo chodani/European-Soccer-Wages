@@ -266,9 +266,9 @@ sigma 4.1    0.1
  predictors:   3
 ------
             Median MAD_SD
-(Intercept)   3.9    0.4 
+(Intercept)   3.9    0.3 
 Rk            0.7    0.0 
-percent     -23.0    7.9 
+percent     -23.0    7.7 
 
 Auxiliary parameter(s):
       Median MAD_SD
@@ -289,7 +289,7 @@ match)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd_diff se_diff
 fit_2  0.0       0.0   
-fit_1 -3.6      29.3   </code></pre>
+fit_1 -3.7      29.3   </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -315,7 +315,9 @@ fit_1 -3.6      29.3   </code></pre>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"There is a positive correlation between league position and payroll"</span>,</span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Standing"</span>,</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Payroll Rank"</span>) <span class="sc">+</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_fivethirtyeight</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_fivethirtyeight</span>() <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>()) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_text</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="model_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>

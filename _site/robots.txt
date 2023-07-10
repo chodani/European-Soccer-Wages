@@ -1,1 +1,1 @@
-Sitemap: https://e72b224e-d0f8-441b-934f-0efaa48ecb2b.netlify.app/sitemap.xml
+Sitemap: https://chodani.quarto.pub/european-soccer-wages/sitemap.xml

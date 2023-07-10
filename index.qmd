@@ -1,14 +1,17 @@
 ---
 title: "Overview"
 execute: 
-  echoe: FALSE
-  message: FALSE
+  echoe: false
+  message: false
 ---
 
 ### Context
 
 
 ```{r}
+#| echo: false
+#| message: false
+#| output: false
 # upload necessary libraries
 library(readxl)
 library(tidyverse)
@@ -23,6 +26,9 @@ top5 <- read_excel("Top5Leagues_Payroll.xlsx")
 ```
 
 ```{r}
+#| echo: false
+#| message: false
+#| output: false
 # select the necessary columns and create a data frame where there is the total money spent of each league across seasons
 a <- top5 |>
   select(-c("# Pl", "Weekly Wages", "% Estimated", "Squad (again)")) |>
