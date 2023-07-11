@@ -44,7 +44,7 @@ x_1 <- x |>
 
 $$y_i = \beta_0  + \beta_1 x_{1,i} + \epsilon_i$$
 
-with $y = standing$, $x_1 =year$, and $\epsilon_i \sim N(0, \sigma^2)$.
+with $y = standing$, $x_1 = PayrollRank$, and $\epsilon_i \sim N(0, \sigma^2)$.
 
 ```{r}
 #| echo: false

@@ -27,7 +27,7 @@ top5 <- read_excel("Top5Leagues_Payroll.xlsx")
 ```
 
 ### General 
-Across the data set, we can a positive correlation between payroll rank and standings. Lookly closely there are notable examples like Leicester City's 15/16 EPL title.
+Across the data set, we can see a positive correlation between payroll rank and standings. Looking closely there are notable exceptions like Leicester City's 15/16 EPL title.
 
 ```{r}
 #| echo: false
