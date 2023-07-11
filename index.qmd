@@ -6,7 +6,7 @@ execute:
 ---
 
 ### Context
-With the global commercialization of soccer, clubs have been rapidly spending more on their squads. Takeovers from American investors and controversy concerning foreign investment has sparked topics about teams' sources of wealth. Across many sports, there have been discussions about the implementation of salary caps.
+With the global commercialization of soccer, clubs have been significantly spending more on their squads. Takeovers from American investors and controversy concerning foreign investment has sparked topics about teams' sources of wealth. Across many sports, there have been discussions about the implementation of salary caps.
 
 ```{r}
 #| echo: false
@@ -54,6 +54,7 @@ a |>
   scale_x_continuous(breaks = seq(2013, 2022, by = 1)) +
   labs(title = "Total Annual Wages for Each League",
        subtitle = "Each league has steadily increased spending",
+       caption = "Source: FBREF",
        color = NULL) +
   theme_fivethirtyeight()
 ```

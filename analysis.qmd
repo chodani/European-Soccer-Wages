@@ -27,6 +27,7 @@ top5 <- read_excel("Top5Leagues_Payroll.xlsx")
 ```
 
 ### General 
+Across the data set, we can a positive correlation between payroll rank and standings. Lookly closely there are notable examples like Leicester City's 15/16 EPL title.
 
 ```{r}
 #| echo: false
@@ -59,10 +60,12 @@ d_1 <- d |>
   geom_smooth(method = "lm", se = FALSE, formula = y ~ x, color = "#fc4f30") +
   labs(title = "Payroll Rank vs. Season Standing \n in the Top Five European Leagues",
        x = "Payroll Rank",
-       y = "Season Standing") +
+       y = "Season Standing",
+       caption = "Source: FBREF") +
   theme_fivethirtyeight() +
   theme(axis.title.x = element_text()) +
-  theme(axis.title.y = element_text())
+  theme(axis.title.y = element_text()) +
+  theme(plot.caption = element_text())
 ```
 
 ```{r}
@@ -76,6 +79,7 @@ d_1 |>
 ```
 
 ### Where it matters
+In European soccer competition, the top four and bottom three standings are important. For the top leagues, a top four place secures Champions League qualification, the most prestigious club soccer tournament; a bottom three place means relegation (demotion to the second division). 
 
 ```{r}
 #| echo: false
@@ -124,6 +128,7 @@ c |>
 ```
 
 ### Which teams are spending wisely?
+To categorize how teams are performing relative to their the payroll rank, I took the difference of standing and payroll rank each year as a measurement. A positive differece means that a team over performed that specific year. The total column represents the sum of the difference in all the years the team appeared in the data set, and rate is the average difference.
 
 ```{r}
 #| echo: false

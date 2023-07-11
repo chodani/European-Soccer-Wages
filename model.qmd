@@ -1,8 +1,8 @@
----
-title: "Model"
----
-
+### Model
+This model predicts a teams final season standing given its payroll rank within the league.
 ```{r}
+#| echo: false
+#| message: false
 # install necessary libraries
 library(readxl)
 library(tidyverse)
@@ -10,14 +10,19 @@ library(writexl)
 library(stringr)
 library(rstanarm)
 library(ggthemes)
+library(gtsummary)
 ```
 
 ```{r}
+#| echo: false
+#| message: false
 # read the excel file as a csv
 top5 <- read_excel("Top5Leagues_Payroll.xlsx")
 ```
 
 ```{r}
+#| echo: false
+#| message: false
 # select the necessary columns and create a data frame where there is the total money spent of each league across seasons
 x <- top5 |>
   select("Season", "Rk", "Squad", "Annual Wages", "Standing") |>
@@ -27,37 +32,52 @@ x <- top5 |>
 ```
 
 ```{r}
+#| echo: false
+#| message: false
+#| output: false
 # create a new data frame, where there is a column for a teams % salary out of the entire league
 x_1 <- x |>
   summarise(.by = Season, Rk = Rk, Squad = Squad, Standing = Standing, annual = annual, percent = annual/sum(annual))
 ```
 
+### Model Definition
+
+$$y_i = \beta_0  + \beta_1 x_{1,i} + \epsilon_i$$
+
+with $y = standing$, $x_1 =year$, and $\epsilon_i \sim N(0, \sigma^2)$.
+
 ```{r}
+#| echo: false
+#| message: false
 # create models, where standing depends on Rk, and in the other Rk and percent
 fit_1 <- stan_glm(Standing ~ Rk,
                   data = x,
                   family = gaussian,
                   refresh = 0,
                   seed = 9)
-
-fit_2 <- stan_glm(Standing ~ Rk + percent,
-                  data = x_1,
-                  family = gaussian,
-                  refresh = 0)
 ```
 
+### Model Parameters
+
 ```{r}
-# glance details of the model 
+#| echo: false
+#| message: false
+#| output: false
+# general info o fitted object
 fit_1
-fit_2
+```
+
+
+```{r}
+#| echo: false
+#| message: false
+# summarize the fitted object
+gtsummary::tbl_regression(fit_1)
 ```
 
 ```{r}
-# compare the models (fit_2 is better)
-loo_compare(loo(fit_1), loo(fit_2))
-```
-
-```{r}
+#| echo: false
+#| message: false
 # create object to model (teams of rank 1 - 20)
 newobs <- tibble(Rk = 1:20)
 
@@ -70,7 +90,10 @@ pe <- posterior_epred(fit_1, newdata = newobs) |>
   mutate_all(as.numeric)
 ```
 
+### Plot
 ```{r}
+#| echo: false
+#| message: false
 # plot the posterior distribution
 pe |>
   ggplot(aes(x = rank, y = standing)) +

@@ -3,10 +3,12 @@ title: "Sources"
 ---
 
 ### Data
-All data was compiled using the [fbref](https://fbref.com/en/) soccer database. Fbref description...  
+All data was compiled using the [fbref](https://fbref.com/en/) soccer database. Fbref description is an extensive soccer database, and it is part of the bigger sports data collection by Sports Reference. The website is well-suited to observe transfers and historical results across many leagues and years.   
 
  
 ### Process
-screen shot website
+Since data was broken up by season and year with standing separated from annual wages, I had to mannualy create an excel file to consolidate the data. This took a few hours of copy and pasting, but made the analysis part much easier. In total, there are 1052 data points in the final file. 
 
-screen shot excel 
+![Screen Shot of FBREF Salaries page](fbref_screen.jpg)
+
+![Screen Shot of Top5Leagues_Payroll.xlsx](excel_screen.jpg)
