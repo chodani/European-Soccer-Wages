@@ -4,7 +4,7 @@
     "href": "model.html",
     "title": "European Soccer Wages",
     "section": "",
-    "text": "Model\nThis model predicts a teams final season standing given its payroll rank within the league.\n\n\nModel Definition\n\\[y_i = \\beta_0  + \\beta_1 x_{1,i} + \\epsilon_i\\]\nwith \\(y = standing\\), \\(x_1 = PayrollRank\\), and \\(\\epsilon_i \\sim N(0, \\sigma^2)\\).\n\n\nModel Parameters\n\n\n\n\n\n\n  \n    \n    \n      Characteristic\n      Beta\n      95% CI1\n    \n  \n  \n    Rk\n0.69\n0.65, 0.74\n  \n  \n  \n    \n      1 CI = Credible Interval\n    \n  \n\n\n\n\n\n\nPlot"
+    "text": "Model\nThis model predicts a teams final season standing given its payroll rank within the league.\n\n\nModel Definition\n\\[y_i = \\beta_0  + \\beta_1 x_{1,i} + \\epsilon_i\\]\nwith \\(y = standing\\), \\(x_1 = PayrollRank\\), and \\(\\epsilon_i \\sim N(0, \\sigma^2)\\).\n\n\nModel Parameters\n\n\n\n\n\n\n  \n    \n    \n      Characteristic\n      Beta\n      95% CI1\n    \n  \n  \n    (Intercept)\n3.2\n2.7, 3.7\n    Rk\n0.69\n0.65, 0.74\n  \n  \n  \n    \n      1 CI = Credible Interval\n    \n  \n\n\n\n\n\n\nPlot"
   },
   {
     "objectID": "index.html",

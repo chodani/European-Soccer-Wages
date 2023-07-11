@@ -3,7 +3,7 @@ title: "Sources"
 ---
 
 ### Data
-All data was compiled using the [fbref](https://fbref.com/en/) soccer database. Fbref description is an extensive soccer database, and it is part of the bigger sports data collection by Sports Reference. The website is well-suited to observe transfers and historical results across many leagues and years.   
+All data was compiled using the [fbref](https://fbref.com/en/) soccer database. Fbref is an extensive soccer database, and it is part of the bigger sports data collection by Sports Reference. The website is well-suited to observe transfers and historical results across many leagues and years.   
 
  
 ### Process
