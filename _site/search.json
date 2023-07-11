@@ -18,7 +18,7 @@
     "href": "sources.html",
     "title": "Sources",
     "section": "",
-    "text": "Data\nAll data was compiled using the fbref soccer database. Fbref description is an extensive soccer database, and it is part of the bigger sports data collection by Sports Reference. The website is well-suited to observe transfers and historical results across many leagues and years.\n\n\nProcess\nSince data was broken up by season and year with standing separated from annual wages, I had to mannualy create an excel file to consolidate the data. This took a few hours of copy and pasting, but made the analysis part much easier. In total, there are 1052 data points in the final file.\n\n\n\nScreen Shot of FBREF Salaries page\n\n\n\n\n\nScreen Shot of Top5Leagues_Payroll.xlsx"
+    "text": "Data\nAll data was compiled using the fbref soccer database. Fbref is an extensive soccer database, and it is part of the bigger sports data collection by Sports Reference. The website is well-suited to observe transfers and historical results across many leagues and years.\n\n\nProcess\nSince data was broken up by season and year with standing separated from annual wages, I had to mannualy create an excel file to consolidate the data. This took a few hours of copy and pasting, but made the analysis part much easier. In total, there are 1052 data points in the final file.\n\n\n\nScreen Shot of FBREF Salaries page\n\n\n\n\n\nScreen Shot of Top5Leagues_Payroll.xlsx"
   },
   {
     "objectID": "about.html",
