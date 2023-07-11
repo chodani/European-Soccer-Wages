@@ -4,7 +4,7 @@
     "href": "model.html",
     "title": "European Soccer Wages",
     "section": "",
-    "text": "This model predicts a teams final season standing given its payroll rank within the league."
+    "text": "Model\nThis model predicts a teams final season standing given its payroll rank within the league.\n\n\nModel Definition\n\\[y_i = \\beta_0  + \\beta_1 x_{1,i} + \\epsilon_i\\]\nwith \\(y = standing\\), \\(x_1 =year\\), and \\(\\epsilon_i \\sim N(0, \\sigma^2)\\).\n\n\nModel Parameters\n\n\n\n\n\n\n  \n    \n    \n      Characteristic\n      Beta\n      95% CI1\n    \n  \n  \n    Rk\n0.69\n0.65, 0.74\n  \n  \n  \n    \n      1 CI = Credible Interval\n    \n  \n\n\n\n\n\n\nPlot"
   },
   {
     "objectID": "index.html",
@@ -47,12 +47,5 @@
     "title": "Analysis",
     "section": "",
     "text": "General\nAcross the data set, we can a positive correlation between payroll rank and standings. Lookly closely there are notable examples like Leicester City’s 15/16 EPL title.\n\n\n\n\n\n\n\n\nWhere it matters\nIn European soccer competition, the top four and bottom three standings are important. For the top leagues, a top four place secures Champions League qualification, the most prestigious club soccer tournament; a bottom three place means relegation (demotion to the second division).\n\n\n\n\n\n\n\n\nWhich teams are spending wisely?\nTo categorize how teams are performing relative to their the payroll rank, I took the difference of standing and payroll rank each year as a measurement. A positive differece means that a team over performed that specific year. The total column represents the sum of the difference in all the years the team appeared in the data set, and rate is the average difference."
-  },
-  {
-    "objectID": "model.html#model-definition",
-    "href": "model.html#model-definition",
-    "title": "European Soccer Wages",
-    "section": "Model Definition",
-    "text": "Model Definition\n\\[y_i = \\beta_0  + \\beta_1 x_{1,i} + \\epsilon_i\\]\nwith \\(y = standing\\), \\(x_1 =year\\), and \\(\\epsilon_i \\sim N(0, \\sigma^2)\\).\n\nModel Parameters\n\n\n\n\n\n\n  \n    \n    \n      Characteristic\n      Beta\n      95% CI1\n    \n  \n  \n    Rk\n0.69\n0.65, 0.74\n  \n  \n  \n    \n      1 CI = Credible Interval\n    \n  \n\n\n\n\n\n\nPlot"
   }
 ]
