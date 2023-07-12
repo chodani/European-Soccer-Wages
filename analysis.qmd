@@ -128,7 +128,7 @@ c |>
 ```
 
 ### Which teams are spending wisely?
-To categorize how teams are performing relative to their the payroll rank, I took the difference of standing and payroll rank each year as a measurement. A positive differece means that a team over performed that specific year. The total column represents the sum of the difference in all the years the team appeared in the data set, and rate is the average difference.
+To categorize how teams are performing relative to their the payroll rank, I took the difference of standing and payroll rank each year as a measurement. A positive difference means that a team over performed that specific year. The total column represents the sum of the difference in all the years the team appeared in the data set, and rate is the average difference.
 
 ```{r}
 #| echo: false
